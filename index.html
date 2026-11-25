@@ -554,7 +554,7 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
         <h1>Masuk ke Panel.</h1>
         <p>Gunakan akun admin yang terdaftar di Supabase Auth.</p>
         <form id="adminLoginForm" class="admin-form">
-          <div class="admin-field"><label for="adminEmail">Email admin</label><input id="adminEmail" type="email" autocomplete="username" value="admin@narekuu.my.id" required></div>
+          <div class="admin-field"><label for="adminEmail">Email admin</label><input id="adminEmail" type="email" name="username" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="admin@narekuu.my.id" required></div>
           <div class="admin-field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Masukkan password" required></div>
           <button class="btn btn-primary" id="adminLoginButton" type="submit">Masuk</button>
           <p id="adminLoginStatus" class="admin-login-status" role="status" aria-live="polite"></p>
@@ -846,12 +846,31 @@ document.getElementById("adminLoginForm").addEventListener("submit",async event=
   }
   button.disabled = true;
   button.textContent = "Memeriksa...";
-  const {error} = await supabaseClient.auth.signInWithPassword({email,password});
-  button.disabled = false;
-  button.textContent = "Masuk";
-  if(error){
+  try{
+    const {data:loginData,error} = await supabaseClient.auth.signInWithPassword({email,password});
+    if(error) throw error;
+    if(loginData.user?.email?.toLowerCase() !== ADMIN_EMAIL){
+      await supabaseClient.auth.signOut();
+      throw new Error("Akun ini tidak memiliki akses admin.");
+    }
+    status.classList.remove("error");
+    status.textContent = "Login berhasil. Membuka panel...";
+  }catch(error){
+    console.error("Supabase login error:",error);
     status.classList.add("error");
-    status.textContent = "Login gagal. Periksa email dan password.";
+    const message = String(error?.message || "").toLowerCase();
+    if(message.includes("invalid login credentials")){
+      status.textContent = "Email admin belum terdaftar di Supabase Auth atau password tidak cocok. Pastikan akun admin sudah dibuat pada project Supabase yang terhubung.";
+    }else if(message.includes("email not confirmed")){
+      status.textContent = "Email admin belum dikonfirmasi. Konfirmasi akun melalui Supabase Auth terlebih dahulu.";
+    }else if(message.includes("tidak memiliki akses")){
+      status.textContent = "Akun ini tidak memiliki akses admin.";
+    }else{
+      status.textContent = "Login gagal: " + (error?.message || "periksa koneksi Supabase.");
+    }
+  }finally{
+    button.disabled = false;
+    button.textContent = "Masuk";
   }
 });
 
