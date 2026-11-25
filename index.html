@@ -1,16 +1,1448 @@
-## Hi there 👋
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#edf2f8">
+<meta name="description" content="Personal Portfolio">
+<title>Portfolio — Personal Website</title>
 
-<!--
-**narekuu/narekuu** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
-Here are some ideas to get you started:
+<style>
+:root{
+  --bg:#edf2f8;
+  --card:rgba(255,255,255,.63);
+  --glass:rgba(255,255,255,.48);
+  --strong:rgba(255,255,255,.82);
+  --text:#202b3a;
+  --muted:#8190a2;
+  --line:rgba(255,255,255,.72);
+  --accent:#526b88;
+  --soft:rgba(82,107,136,.12);
+  --shadow:0 12px 40px rgba(35,50,70,.10);
+  --blur:22px;
+  --radius:22px;
+}
+[data-theme="dark"]{
+  --bg:#101722;
+  --card:rgba(29,40,55,.85);
+  --glass:rgba(31,44,60,.78);
+  --strong:rgba(37,51,69,.95);
+  --text:#edf3fa;
+  --muted:#91a0b2;
+  --line:rgba(255,255,255,.09);
+  --accent:#a9bfd9;
+  --soft:rgba(169,191,217,.12);
+  --shadow:0 12px 40px rgba(0,0,0,.22);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{
+  font-family:Inter,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  transition:.3s;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 10% 10%,rgba(133,163,195,.16),transparent 40%),
+    radial-gradient(ellipse at 90% 40%,rgba(176,193,213,.19),transparent 42%);
+}
+[data-theme="dark"] body::before{
+  background:radial-gradient(ellipse at 10% 10%,rgba(75,105,140,.12),transparent 40%);
+}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.container{width:min(1120px,calc(100% - 40px));margin:auto}
+.glass{
+  background:var(--card);
+  border:1px solid var(--line);
+  backdrop-filter:blur(var(--blur));
+  -webkit-backdrop-filter:blur(var(--blur));
+  box-shadow:var(--shadow);
+  border-radius:var(--radius);
+}
+.navbar{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  width:min(1120px,calc(100% - 32px));z-index:1000;
+  padding:12px 17px;border:1px solid var(--line);
+  background:var(--strong);backdrop-filter:blur(22px);
+  border-radius:17px;box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:space-between;gap:15px;
+}
+.logo{font-size:19px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:5px}
+.nav-links a{
+  font-size:11px;font-weight:700;color:var(--muted);
+  padding:10px;border-radius:10px;transition:.2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--soft)}
+.nav-actions{display:flex;gap:8px}
+.icon-btn{
+  min-width:37px;height:37px;padding:0 9px;
+  border:1px solid var(--line);background:var(--glass);
+  color:var(--text);border-radius:11px;display:grid;place-items:center;
+}
+.icon-btn svg{width:17px;height:17px}
+.menu-btn{display:none}
+section{padding:100px 0 35px}
+.section-heading{margin-bottom:32px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--accent);font-size:10px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;
+}
+.eyebrow:before{content:"";width:22px;height:2px;background:var(--accent)}
+.section-heading h2{font-size:clamp(28px,5vw,43px);letter-spacing:-2px;font-weight:900}
+.section-heading p{color:var(--muted);font-size:13px;line-height:1.8;margin-top:12px;max-width:550px}
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:130px}
+.hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(43px,7vw,75px);font-weight:900;line-height:1.05;letter-spacing:-4px;margin-bottom:22px}
+.hero h1 span{color:var(--accent)}
+.hero-description{max-width:520px;color:var(--muted);font-size:14px;line-height:1.9;margin-bottom:28px}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:11px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 18px;border-radius:12px;font-size:12px;font-weight:800;
+  transition:.25s;border:0;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.btn-primary{background:var(--accent);color:white}
+[data-theme="dark"] .btn-primary{color:#152131}
+.btn-secondary{background:var(--glass);border:1px solid var(--line);color:var(--text)}
+.btn svg{width:16px;height:16px}
+.hero-card{padding:21px;overflow:hidden}
+.profile-image{
+  height:280px;border-radius:17px;overflow:hidden;
+  background:linear-gradient(145deg,#cbd7e4,#879bb1);
+  display:grid;place-items:center;
+}
+.profile-image img{width:100%;height:100%;object-fit:cover}
+.profile-placeholder{color:white;text-align:center;font-size:12px}
+.profile-placeholder svg{width:55px;height:55px;margin-bottom:10px}
+.profile-info{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:18px}
+.profile-info h3{font-size:15px}
+.profile-info p{font-size:10px;color:var(--muted);margin-top:5px}
+.profile-badge{background:var(--soft);color:var(--accent);padding:8px 10px;border-radius:9px;font-size:9px;font-weight:900}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.stat{padding:14px 8px;text-align:center;background:var(--glass);border:1px solid var(--line);border-radius:13px}
+.stat h3{font-size:22px;font-weight:900}
+.stat p{font-size:9px;color:var(--muted);margin-top:5px}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.about-card{padding:25px}
+.about-card h3{font-size:18px;margin-bottom:14px}
+.about-card p{font-size:12px;color:var(--muted);line-height:1.9;white-space:pre-line}
+.about-details{display:grid;gap:15px}
+.detail{display:flex;align-items:center;gap:12px}
+.detail-icon{
+  width:40px;height:40px;flex-shrink:0;display:grid;place-items:center;
+  border-radius:12px;background:var(--soft);color:var(--accent)
+}
+.detail-icon svg{width:18px;height:18px}
+.detail small{display:block;font-size:9px;color:var(--muted);margin-bottom:4px}
+.detail strong{font-size:11px}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.skill-card{
+  min-height:145px;padding:20px 12px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:12px;
+  transition:.25s;
+}
+.skill-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.skill-logo{width:48px;height:48px;display:grid;place-items:center}
+.skill-logo i{font-size:40px}
+.skill-card h3{font-size:12px}
+.skill-card p{font-size:10px;color:var(--muted)}
+.skills-note{font-size:11px;color:var(--muted);margin-top:17px;line-height:1.7}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.project-card{overflow:hidden;transition:.25s}
+.project-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.project-cover{
+  height:190px;display:grid;place-items:center;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#d5dfeb,#9cacc0)
+}
+[data-theme="dark"] .project-cover{background:linear-gradient(135deg,#26374b,#3c5067)}
+.project-cover:before,.project-cover:after{
+  content:"";position:absolute;border:1px solid rgba(255,255,255,.35);
+  border-radius:50%;width:220px;height:220px
+}
+.project-cover:after{width:150px;height:150px}
+.project-cover span{z-index:1;color:white;font-size:27px;font-weight:900;text-shadow:0 3px 15px #0002}
+.project-content{padding:21px}
+.project-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.project-top h3{font-size:16px}
+.project-type{font-size:9px;font-weight:800;padding:7px 9px;background:var(--soft);color:var(--accent);border-radius:8px}
+.project-content p{font-size:11px;color:var(--muted);line-height:1.8}
+.project-link{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;margin-top:16px;color:var(--accent)}
+.project-link svg{width:14px;height:14px}
+
+/* JOURNEY */
+.timeline{position:relative;max-width:750px;margin-left:10px}
+.timeline:before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.timeline-item{position:relative;padding:0 0 25px 40px}
+.timeline-dot{position:absolute;left:2px;top:3px;width:13px;height:13px;border-radius:50%;background:var(--accent);border:3px solid var(--bg)}
+.timeline-card{padding:20px}
+.timeline-card small{color:var(--accent);font-size:9px;font-weight:800}
+.timeline-card h3{font-size:14px;margin:8px 0}
+.timeline-card p{font-size:11px;color:var(--muted);line-height:1.8}
+
+/* CONTACT */
+.contact-card{padding:42px 28px}
+.contact-heading{text-align:center}
+.contact-card h2{font-size:clamp(28px,5vw,43px);letter-spacing:-2px;margin-bottom:13px}
+.contact-card p{color:var(--muted);font-size:12px;line-height:1.8;max-width:480px;margin:0 auto 22px}
+.contact-links{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:430px;margin:30px auto 40px}
+.contact-item{
+  min-height:115px;padding:18px 10px;border:1px solid var(--line);
+  background:var(--glass);border-radius:17px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;transition:.25s
+}
+.contact-item:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.contact-icon{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;background:var(--soft);color:var(--accent)}
+.contact-icon svg{width:22px;height:22px}
+.contact-item strong{font-size:11px}
+.contact-form-wrapper{max-width:650px;margin:auto;padding:25px;border:1px solid var(--line);background:var(--glass);border-radius:20px}
+.contact-form-heading{margin-bottom:20px}
+.contact-form-heading h3{font-size:18px;margin-bottom:7px}
+.contact-form-heading p{font-size:11px;margin:0}
+.contact-form{display:grid;gap:15px}
+.form-group{display:grid;gap:8px}
+.form-group label{font-size:10px;font-weight:800}
+.form-group input,.form-group textarea{
+  width:100%;padding:13px;border:1px solid var(--line);border-radius:11px;
+  outline:none;background:var(--strong);color:var(--text);font-size:11px
+}
+.form-group textarea{min-height:130px;resize:vertical}
+.contact-submit{width:100%}
+.form-note{font-size:10px!important;text-align:center;margin:0!important}
+.form-status{display:none;padding:12px;border-radius:10px;font-size:11px;text-align:center}
+.form-status.success{display:block;color:#247a50;background:#2ea06418}
+.form-status.error{display:block;color:#bd4141;background:#dc464618}
+
+/* FOOTER */
+footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
+.footer-content{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footer-content p{font-size:10px;color:var(--muted)}
+.socials{display:flex;gap:8px}
+.socials a{width:36px;height:36px;border:1px solid var(--line);background:var(--glass);display:grid;place-items:center;border-radius:11px}
+.socials svg{width:16px;height:16px}
+.back-top{
+  position:fixed;bottom:22px;right:22px;width:43px;height:43px;
+  border:1px solid var(--line);border-radius:13px;background:var(--strong);
+  color:var(--text);box-shadow:var(--shadow);display:grid;place-items:center;
+  opacity:0;visibility:hidden;transition:.25s;z-index:900
+}
+.back-top.show{opacity:1;visibility:visible}
+.back-top svg{width:18px;height:18px}
+
+/* ADMIN */
+.admin-page{padding:115px 0 50px;min-height:100vh}
+.admin-header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
+.admin-header h1{font-size:28px;letter-spacing:-1px}
+.admin-header p{font-size:11px;color:var(--muted);margin-top:6px}
+.admin-layout{display:grid;grid-template-columns:220px 1fr;gap:18px;align-items:start}
+.admin-sidebar{padding:14px;position:sticky;top:100px}
+.admin-tab{
+  width:100%;padding:12px;text-align:left;border:0;border-radius:10px;
+  color:var(--muted);background:transparent;font-size:11px;font-weight:800;
+  margin-bottom:4px
+}
+.admin-tab.active,.admin-tab:hover{background:var(--soft);color:var(--text)}
+.admin-content{padding:24px;min-width:0}
+.admin-panel{display:none}
+.admin-panel.active{display:block}
+.admin-panel h2{font-size:20px;margin-bottom:7px}
+.admin-panel>p{font-size:11px;color:var(--muted);margin-bottom:22px;line-height:1.7}
+.admin-form{display:grid;gap:15px}
+.admin-field{display:grid;gap:7px}
+.admin-field label{font-size:10px;font-weight:800}
+.admin-field input,.admin-field textarea,.admin-field select{
+  width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;
+  background:var(--strong);color:var(--text);outline:none;font-size:11px
+}
+.admin-field textarea{min-height:95px;resize:vertical;line-height:1.7}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.admin-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
+.admin-list{display:grid;gap:12px;margin-top:20px}
+.admin-list-item{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--glass)
+}
+.admin-list-item strong{font-size:11px;display:block}
+.admin-list-item small{font-size:9px;color:var(--muted);display:block;margin-top:4px;word-break:break-all}
+.admin-list-actions{display:flex;gap:6px;flex-shrink:0}
+.small-btn{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--glass);color:var(--text);font-size:9px;font-weight:800}
+.small-btn.danger{color:#d45b5b}
+.admin-notice{padding:13px;border-radius:11px;background:var(--soft);font-size:10px;line-height:1.7;color:var(--muted);margin-bottom:20px}
+.admin-save{position:sticky;bottom:12px;padding:13px;background:var(--strong);border:1px solid var(--line);border-radius:13px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:20px}
+.admin-save span{font-size:10px;color:var(--muted)}
+.hidden{display:none!important}
+
+@media(max-width:900px){
+  .skills-grid{grid-template-columns:repeat(4,1fr)}
+  .nav-links a{padding:9px 7px;font-size:10px}
+}
+@media(max-width:650px){
+  .container{width:calc(100% - 30px)}
+  .navbar{top:10px;padding:10px 13px}
+  .menu-btn{display:grid}
+  .nav-links{
+    position:absolute;top:calc(100% + 9px);left:0;right:0;padding:11px;
+    background:var(--strong);backdrop-filter:blur(25px);border:1px solid var(--line);
+    border-radius:15px;box-shadow:var(--shadow);display:flex;flex-direction:column;
+    align-items:stretch;opacity:0;visibility:hidden;transform:translateY(-8px);transition:.2s
+  }
+  .nav-links.open{opacity:1;visibility:visible;transform:translateY(0)}
+  .nav-links a{font-size:11px;padding:12px}
+  .hero{min-height:auto;padding-top:135px;padding-bottom:45px}
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero h1{font-size:clamp(42px,12vw,59px);letter-spacing:-3px}
+  .hero-card{max-width:430px;width:100%;margin:auto}
+  .profile-image{height:290px}
+  section{padding-top:75px}
+  .about-grid,.projects-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:repeat(3,1fr);gap:9px}
+  .skill-card{min-height:130px;padding:15px 7px}
+  .skill-logo{width:42px;height:42px}
+  .skill-logo i{font-size:35px}
+  .project-cover{height:170px}
+  .contact-card{padding:35px 17px}
+  .contact-form-wrapper{padding:20px 15px}
+  .footer-content{flex-direction:column;text-align:center}
+  .admin-layout{grid-template-columns:1fr}
+  .admin-sidebar{position:static;display:flex;overflow-x:auto;gap:5px;padding:8px}
+  .admin-tab{width:auto;white-space:nowrap;margin:0}
+  .admin-content{padding:17px}
+  .admin-header{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:400px){.skills-grid{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* REPEATING SCROLL REVEAL */
+.scroll-reveal{
+  opacity:0;
+  transform:translate3d(0,34px,0) scale(.985);
+  filter:blur(5px);
+  transition:
+    opacity .7s cubic-bezier(.2,.7,.2,1),
+    transform .7s cubic-bezier(.2,.7,.2,1),
+    filter .7s cubic-bezier(.2,.7,.2,1);
+  will-change:opacity,transform,filter;
+}
+.scroll-reveal.from-left{transform:translate3d(-34px,0,0) scale(.985)}
+.scroll-reveal.from-right{transform:translate3d(34px,0,0) scale(.985)}
+.scroll-reveal.from-zoom{transform:translate3d(0,12px,0) scale(.94)}
+.scroll-reveal.is-visible{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+}
+@media(prefers-reduced-motion:reduce){
+  .scroll-reveal,.scroll-reveal.from-left,.scroll-reveal.from-right,.scroll-reveal.from-zoom{
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+    transition:none!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PUBLIC NAVIGATION -->
+<nav class="navbar" id="publicNavbar">
+  <a href="/portofolio/" class="logo" id="brandLogo">NAREN<span>.</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="/portofolio/" data-route="home">Beranda</a>
+    <a href="/portofolio/tentang" data-route="about">Tentang</a>
+    <a href="/portofolio/keahlian" data-route="skills">Keahlian</a>
+    <a href="/portofolio/proyek" data-route="projects">Proyek</a>
+    <a href="/portofolio/perjalanan" data-route="journey">Perjalanan</a>
+    <a href="/portofolio/kontak" data-route="contact">Kontak</a>
+  </div>
+  <div class="nav-actions">
+    <button class="icon-btn" id="languageToggle" aria-label="Ganti bahasa">ID</button>
+    <button class="icon-btn" id="themeToggle" aria-label="Ganti tema">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+    </button>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ADMIN NAVIGATION -->
+<nav class="navbar hidden" id="adminNavbar">
+  <a href="/portofolio/" class="logo">PORTFOLIO<span>.</span></a>
+  <div style="font-size:10px;color:var(--muted);font-weight:800">DEVELOPER PANEL</div>
+  <div class="nav-actions">
+    <a href="/portofolio/" class="icon-btn" title="Lihat website">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7M10 14 21 3M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>
+    </a>
+    <button class="icon-btn" id="adminThemeToggle" aria-label="Ganti tema">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="publicApp">
+
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <h1><span id="heroGreeting">Halo, saya</span><br><span id="heroName">Naren Ardhana.</span></h1>
+      <p class="hero-description" id="heroDescription"></p>
+      <div class="hero-buttons">
+        <a href="/portofolio/proyek" class="btn btn-primary">Lihat Proyek
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+        <a href="/portofolio/kontak" class="btn btn-secondary">Hubungi Saya</a>
+      </div>
+    </div>
+
+    <div class="hero-card glass">
+      <div class="profile-image">
+        <img id="profilePhoto" src="" alt="Foto profil" onerror="this.style.display='none';document.getElementById('profileFallback').classList.remove('hidden')">
+        <div class="profile-placeholder hidden" id="profileFallback">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          <div>Profile Photo</div>
+        </div>
+      </div>
+      <div class="profile-info">
+        <div><h3 id="profileName">Naren Ardhana</h3><p id="profileRole">Developer · Creator · Explorer</p></div>
+        <span class="profile-badge">PORTFOLIO</span>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><h3 id="statProjects">4</h3><p>Proyek</p></div>
+        <div class="stat"><h3 id="statSkills">5</h3><p>Minat</p></div>
+        <div class="stat"><h3>∞</h3><p>Ide</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Kenali saya</span>
+      <h2>Tentang Saya.</h2>
+      <p>Sedikit perkenalan tentang diri saya dan hal-hal yang saya sukai.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card glass">
+        <h3>Siapa Saya?</h3>
+        <p id="aboutDescription"></p>
+      </div>
+      <div class="about-card glass">
+        <h3>Informasi Pribadi</h3>
+        <div class="about-details" id="personalDetails"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Hal yang saya pelajari</span>
+      <h2>Teknologi & Tools.</h2>
+      <p>Teknologi dan tools yang saya gunakan untuk belajar serta mengembangkan proyek digital.</p>
+    </div>
+    <div class="skills-grid" id="skillsGrid"></div>
+    <p class="skills-note" id="skillsNote"></p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Karya pilihan</span>
+      <h2>Proyek Unggulan.</h2>
+      <p>Kumpulan proyek digital dan ide yang sedang saya kembangkan.</p>
+    </div>
+    <div class="projects-grid" id="projectsGrid"></div>
+  </div>
+</section>
+
+<section id="journey">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Perkembangan saya</span>
+      <h2>Perjalanan Saya.</h2>
+      <p>Setiap proyek adalah kesempatan baru untuk mempelajari sesuatu.</p>
+    </div>
+    <div class="timeline" id="journeyTimeline"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-card glass">
+      <div class="contact-heading">
+        <span class="eyebrow">Mari terhubung</span>
+        <h2 id="contactTitle">Punya ide?</h2>
+        <p id="contactDescription"></p>
+      </div>
+      <div class="contact-links" id="contactLinks"></div>
+
+      <div class="contact-form-wrapper">
+        <div class="contact-form-heading">
+          <h3>Kirim Pesan</h3>
+          <p>Punya pertanyaan atau ide? Kirim pesan melalui formulir di bawah ini.</p>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="contactName">Nama</label>
+            <input type="text" id="contactName" name="name" placeholder="Masukkan nama kamu" maxlength="80" required>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" name="email" placeholder="nama@email.com" maxlength="120" required>
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Pesan</label>
+            <textarea id="contactMessage" name="message" placeholder="Tuliskan pesan kamu di sini..." maxlength="3000" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary contact-submit" id="contactSubmit">Kirim Pesan</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          <p class="form-note">Pesan akan dikirim ke email admin.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ADMIN PANEL -->
+<main id="adminApp" class="hidden">
+  <section class="admin-page">
+    <div class="container">
+      <div class="admin-header">
+        <div>
+          <span class="eyebrow">PORTFOLIO MANAGEMENT</span>
+          <h1>Panel Pengelola.</h1>
+          <p>Kelola informasi dan konten website portfolio kamu.</p>
+        </div>
+        <a href="/portofolio/" class="btn btn-secondary">Lihat Website ↗</a>
+      </div>
+
+      <div class="admin-notice">
+        Mode awal: perubahan disimpan di browser ini menggunakan localStorage.
+        Untuk mengelola website secara online dari perangkat lain, panel perlu dihubungkan ke backend dan database.
+        Jangan gunakan versi ini sebagai panel admin produksi sebelum autentikasi server ditambahkan.
+      </div>
+
+      <div class="admin-layout">
+        <aside class="admin-sidebar glass">
+          <button class="admin-tab active" data-tab="identity">Identitas</button>
+          <button class="admin-tab" data-tab="about">Tentang Saya</button>
+          <button class="admin-tab" data-tab="skills">Keahlian</button>
+          <button class="admin-tab" data-tab="projects">Proyek</button>
+          <button class="admin-tab" data-tab="journey">Perjalanan</button>
+          <button class="admin-tab" data-tab="contact">Kontak</button>
+          <button class="admin-tab" data-tab="settings">Pengaturan</button>
+        </aside>
+
+        <div class="admin-content glass">
+
+          <!-- IDENTITY -->
+          <div class="admin-panel active" id="panel-identity">
+            <h2>Identitas Portfolio</h2>
+            <p>Atur nama, headline, foto, dan informasi utama yang tampil di halaman depan.</p>
+            <div class="admin-form">
+              <div class="admin-grid">
+                <div class="admin-field"><label>Nama brand / logo</label><input id="editBrand"></div>
+                <div class="admin-field"><label>Nama lengkap</label><input id="editName"></div>
+              </div>
+              <div class="admin-field"><label>Jabatan / profesi</label><input id="editRole"></div>
+              <div class="admin-field"><label>Kalimat pembuka</label><input id="editGreeting"></div>
+              <div class="admin-field"><label>Deskripsi utama</label><textarea id="editHeroDescription"></textarea></div>
+              <div class="admin-field"><label>URL foto profil</label><input id="editPhoto" placeholder="https://domain.com/foto.jpg"></div>
+              <div class="admin-grid">
+                <div class="admin-field"><label>Jumlah proyek (statistik)</label><input id="editStatProjects" type="number" min="0"></div>
+                <div class="admin-field"><label>Jumlah minat (statistik)</label><input id="editStatSkills" type="number" min="0"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ABOUT -->
+          <div class="admin-panel" id="panel-about">
+            <h2>Tentang Saya</h2>
+            <p>Atur deskripsi dan detail informasi pribadi.</p>
+            <div class="admin-form">
+              <div class="admin-field"><label>Judul bagian</label><input id="editAboutTitle"></div>
+              <div class="admin-field"><label>Deskripsi tentang saya</label><textarea id="editAboutDescription"></textarea></div>
+              <div class="admin-field"><label>Fokus utama</label><input id="editFocus"></div>
+              <div class="admin-field"><label>Brand</label><input id="editAboutBrand"></div>
+              <div class="admin-field"><label>Prinsip / motto</label><input id="editMindset"></div>
+            </div>
+          </div>
+
+          <!-- SKILLS -->
+          <div class="admin-panel" id="panel-skills">
+            <h2>Keahlian & Teknologi</h2>
+            <p>Tambah, ubah, atau hapus teknologi yang tampil pada portfolio.</p>
+            <div class="admin-grid">
+              <div class="admin-field"><label>Nama keahlian</label><input id="skillName" placeholder="Contoh: JavaScript"></div>
+              <div class="admin-field"><label>Keterangan</label><input id="skillDescription" placeholder="Programming"></div>
+            </div>
+            <div class="admin-field"><label>Class ikon Devicon (opsional)</label><input id="skillIcon" placeholder="devicon-javascript-plain colored"></div>
+            <div class="admin-actions">
+              <button class="btn btn-primary" id="addSkill">Tambah Keahlian</button>
+              <button class="btn btn-secondary hidden" id="cancelSkillEdit">Batal Edit</button>
+            </div>
+            <div class="admin-list" id="adminSkillsList"></div>
+          </div>
+
+          <!-- PROJECTS -->
+          <div class="admin-panel" id="panel-projects">
+            <h2>Daftar Proyek</h2>
+            <p>Atur nama, kategori, deskripsi, dan URL tujuan tombol proyek.</p>
+            <div class="admin-form">
+              <div class="admin-grid">
+                <div class="admin-field"><label>Nama proyek</label><input id="projectName" placeholder="Nama proyek"></div>
+                <div class="admin-field"><label>Kategori</label><input id="projectType" placeholder="Website / Aplikasi"></div>
+              </div>
+              <div class="admin-field"><label>Deskripsi</label><textarea id="projectDescription"></textarea></div>
+              <div class="admin-field"><label>URL proyek</label><input id="projectUrl" placeholder="https://website-proyek.com"></div>
+              <div class="admin-field"><label>Teks cover</label><input id="projectCover" placeholder="Nama singkat untuk cover"></div>
+            </div>
+            <div class="admin-actions">
+              <button class="btn btn-primary" id="addProject">Tambah Proyek</button>
+              <button class="btn btn-secondary hidden" id="cancelProjectEdit">Batal Edit</button>
+            </div>
+            <div class="admin-list" id="adminProjectsList"></div>
+          </div>
+
+          <!-- JOURNEY -->
+          <div class="admin-panel" id="panel-journey">
+            <h2>Perjalanan</h2>
+            <p>Kelola timeline perjalanan belajar dan perkembangan kamu.</p>
+            <div class="admin-form">
+              <div class="admin-grid">
+                <div class="admin-field"><label>Label / periode</label><input id="journeyLabel"></div>
+                <div class="admin-field"><label>Judul</label><input id="journeyTitle"></div>
+              </div>
+              <div class="admin-field"><label>Deskripsi</label><textarea id="journeyDescription"></textarea></div>
+            </div>
+            <div class="admin-actions">
+              <button class="btn btn-primary" id="addJourney">Tambah Perjalanan</button>
+              <button class="btn btn-secondary hidden" id="cancelJourneyEdit">Batal Edit</button>
+            </div>
+            <div class="admin-list" id="adminJourneyList"></div>
+          </div>
+
+          <!-- CONTACT -->
+          <div class="admin-panel" id="panel-contact">
+            <h2>Informasi Kontak</h2>
+            <p>Atur tujuan tautan media sosial dan email penerima formulir.</p>
+            <div class="admin-form">
+              <div class="admin-field"><label>Judul kontak</label><input id="editContactTitle"></div>
+              <div class="admin-field"><label>Deskripsi kontak</label><textarea id="editContactDescription"></textarea></div>
+              <div class="admin-field"><label>Username / URL Telegram</label><input id="editTelegram"></div>
+              <div class="admin-field"><label>URL GitHub</label><input id="editGithub"></div>
+              <div class="admin-field"><label>Email penerima formulir</label><input id="editEmail" type="email"></div>
+            </div>
+          </div>
+
+          <!-- SETTINGS -->
+          <div class="admin-panel" id="panel-settings">
+            <h2>Pengaturan Website</h2>
+            <p>Pengaturan tambahan dan pengelolaan data portfolio.</p>
+            <div class="admin-form">
+              <div class="admin-field"><label>Catatan keahlian</label><textarea id="editSkillsNote"></textarea></div>
+              <div class="admin-field"><label>Judul halaman browser</label><input id="editPageTitle"></div>
+              <div class="admin-field"><label>Deskripsi SEO</label><textarea id="editMetaDescription"></textarea></div>
+            </div>
+            <div class="admin-actions">
+              <button class="btn btn-secondary" id="exportData">Export Data JSON</button>
+              <button class="btn btn-secondary" id="importDataButton">Import Data JSON</button>
+              <input type="file" id="importDataFile" accept="application/json" class="hidden">
+              <button class="btn btn-secondary" id="resetData">Reset Data Awal</button>
+            </div>
+          </div>
+
+          <div class="admin-save">
+            <span id="saveStatus">Perubahan belum disimpan.</span>
+            <button class="btn btn-primary" id="saveAll">Simpan Perubahan</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="publicFooter">
+  <div class="container footer-content">
+    <p>© <span id="year"></span> <span id="footerName">Portfolio</span>. Hak cipta dilindungi.</p>
+    <div class="socials" id="footerSocials"></div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
+<script>
+/* PORTFOLIO DATA */
+const DEFAULT_DATA = {
+  brand:"NAREN",
+  name:"Naren Ardhana Suryakencana",
+  shortName:"Naren Ardhana",
+  role:"Developer · Creator · Explorer",
+  greeting:"Halo, saya",
+  heroDescription:"Seorang developer muda dan penggemar dunia digital yang senang menjelajahi teknologi, membangun produk digital, dan mengubah ide menjadi sesuatu yang bermakna.",
+  photo:"",
+  statProjects:4,
+  statSkills:5,
+
+  aboutTitle:"Tentang Saya.",
+  aboutDescription:"Saya Naren Ardhana Suryakencana, seseorang yang memiliki ketertarikan pada teknologi dan kreativitas digital. Saya senang mempelajari cara kerja website, aplikasi, API, dan server.\n\nSaya percaya setiap proyek hebat dimulai dari rasa ingin tahu, eksperimen, dan keberanian untuk terus belajar.",
+  focus:"Pengembangan Web & Teknologi",
+  aboutBrand:"NAREKUU",
+  mindset:"Learn, Build, Improve.",
+
+  skillsNote:"Daftar ini mencakup teknologi yang sedang saya pelajari dan eksplorasi.",
+  skills:[
+    {name:"HTML5",description:"Markup Language",icon:"devicon-html5-plain colored"},
+    {name:"CSS3",description:"Styling",icon:"devicon-css3-plain colored"},
+    {name:"JavaScript",description:"Programming",icon:"devicon-javascript-plain colored"},
+    {name:"Python",description:"Programming",icon:"devicon-python-plain colored"},
+    {name:"Node.js",description:"JavaScript Runtime",icon:"devicon-nodejs-plain colored"},
+    {name:"GitHub",description:"Code Hosting",icon:"devicon-github-original colored"},
+    {name:"Linux",description:"Operating System",icon:"devicon-linux-plain colored"}
+  ],
+
+  projects:[
+    {name:"NAREKUU",type:"Platform Web",description:"Platform digital independen yang berfokus pada layanan web, hosting, dan berbagai produk digital.",url:"https://narekuu.my.id",cover:"NAREKUU"},
+    {name:"ANILIX",type:"Platform Anime",description:"Platform digital bertema anime dengan fitur penemuan konten, pencarian, dan pengalaman menonton personal.",url:"",cover:"ANILIX"},
+    {name:"Anime Destiny Circle",type:"Komunitas",description:"Proyek komunitas digital yang berfokus pada anime, kreativitas, dan partisipasi anggota.",url:"",cover:"ADC"},
+    {name:"RYZ STORE",type:"Toko Digital",description:"Konsep toko digital yang dirancang untuk menyediakan produk dan layanan online dengan mudah.",url:"",cover:"RYZ STORE"}
+  ],
+
+  journey:[
+    {label:"AWAL PERJALANAN",title:"Mengenal Teknologi",description:"Mulai mengeksplorasi teknologi, website, dan cara kerja produk digital di balik layar."},
+    {label:"TAHAP BELAJAR",title:"Mengeksplorasi Web Development",description:"Mempelajari HTML, CSS, JavaScript, API, dan dasar-dasar membangun website interaktif."},
+    {label:"TAHAP MEMBANGUN",title:"Membuat Proyek Digital",description:"Mulai mengembangkan proyek mandiri dan bereksperimen dengan berbagai ide serta teknologi."},
+    {label:"TERUS BERKEMBANG",title:"Terus Belajar & Berkarya",description:"Terus meningkatkan kemampuan, mengeksplorasi teknologi baru, dan mengembangkan pengalaman digital yang lebih baik."}
+  ],
+
+  contactTitle:"Punya ide?",
+  contactDescription:"Tertarik dengan proyek, kolaborasi, atau sekadar ingin menyapa? Silakan hubungi saya.",
+  telegram:"https://t.me/narekuu",
+  github:"https://github.com/narekuu",
+  email:"admin@narekuu.my.id",
+
+  pageTitle:"Personal Portfolio",
+  metaDescription:"Personal Portfolio — Developer and Digital Creator"
+};
+
+let data = loadData();
+
+function clone(value){
+  return JSON.parse(JSON.stringify(value));
+}
+
+function loadData(){
+  try{
+    const saved = localStorage.getItem("portfolio-content-v1");
+    if(saved){
+      const parsed = JSON.parse(saved);
+      return {...clone(DEFAULT_DATA),...parsed};
+    }
+  }catch(error){}
+  return clone(DEFAULT_DATA);
+}
+
+function saveData(){
+  try{
+    localStorage.setItem("portfolio-content-v1",JSON.stringify(data));
+    document.getElementById("saveStatus").textContent = "Perubahan berhasil disimpan di browser ini.";
+    renderPortfolio();
+    return true;
+  }catch(error){
+    document.getElementById("saveStatus").textContent = "Gagal menyimpan data.";
+    return false;
+  }
+}
+
+/* ROUTING */
+const BASE_PATH = "/portofolio";
+const routeMap = {
+  home:"/",
+  about:"/tentang",
+  skills:"/keahlian",
+  projects:"/proyek",
+  journey:"/perjalanan",
+  contact:"/kontak"
+};
+
+function getCurrentPath(){
+  return location.pathname.replace(/\/+$/,"") || "/";
+}
+
+function navigate(path){
+  history.pushState({}, "", path);
+  handleRoute();
+}
+
+function handleRoute(){
+  const path = getCurrentPath();
+  const adminPath = BASE_PATH + "/pdev";
+  const publicApp = document.getElementById("publicApp");
+  const adminApp = document.getElementById("adminApp");
+  const publicNavbar = document.getElementById("publicNavbar");
+  const adminNavbar = document.getElementById("adminNavbar");
+  const footer = document.getElementById("publicFooter");
+  const backTop = document.getElementById("backTop");
+
+  if(path === adminPath || path === adminPath + "/"){
+    publicApp.classList.add("hidden");
+    publicNavbar.classList.add("hidden");
+    footer.classList.add("hidden");
+    adminApp.classList.remove("hidden");
+    adminNavbar.classList.remove("hidden");
+    backTop.classList.add("hidden");
+    renderAdmin();
+    return;
+  }
+
+  publicApp.classList.remove("hidden");
+  publicNavbar.classList.remove("hidden");
+  footer.classList.remove("hidden");
+  adminApp.classList.add("hidden");
+  adminNavbar.classList.add("hidden");
+  backTop.classList.remove("hidden");
+
+  const relative = path.startsWith(BASE_PATH)
+    ? path.slice(BASE_PATH.length) || "/"
+    : "/";
+
+  const target = Object.keys(routeMap).find(key => routeMap[key] === relative) || "home";
+  const section = document.getElementById(target);
+
+  document.querySelectorAll(".nav-links a").forEach(link=>{
+    link.classList.toggle("active",link.dataset.route === target);
+  });
+
+  setTimeout(()=>{
+    if(section){
+      window.scrollTo({top:section.offsetTop - 80,behavior:"smooth"});
+    }else{
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+  },30);
+}
+
+document.addEventListener("click",event=>{
+  const link = event.target.closest("a");
+  if(!link) return;
+
+  const href = link.getAttribute("href");
+  if(!href || href.startsWith("#")) return;
+  if(link.target === "_blank") return;
+
+  if(href.startsWith(BASE_PATH + "/") || href === BASE_PATH || href === BASE_PATH + "/"){
+    event.preventDefault();
+    navigate(href);
+  }
+});
+
+window.addEventListener("popstate",handleRoute);
+
+/* HELPERS */
+function escapeHTML(value){
+  return String(value ?? "").replace(/[&<>"']/g,char=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
+}
+
+function safeURL(value){
+  const url = String(value || "").trim();
+  if(!url) return "";
+  try{
+    const parsed = new URL(url,location.origin);
+    if(!["http:","https:"].includes(parsed.protocol)) return "";
+    return parsed.href;
+  }catch(error){
+    return "";
+  }
+}
+
+function renderPortfolio(){
+  document.title = data.pageTitle || "Personal Portfolio";
+  document.querySelector('meta[name="description"]').content = data.metaDescription || "";
+
+  document.getElementById("brandLogo").innerHTML = escapeHTML(data.brand) + "<span>.</span>";
+  document.getElementById("heroGreeting").textContent = data.greeting;
+  document.getElementById("heroName").textContent = data.shortName + ".";
+  document.getElementById("heroDescription").textContent = data.heroDescription;
+  document.getElementById("profileName").textContent = data.shortName;
+  document.getElementById("profileRole").textContent = data.role;
+  document.getElementById("footerName").textContent = data.shortName;
+
+  const photo = document.getElementById("profilePhoto");
+  const fallback = document.getElementById("profileFallback");
+  if(data.photo){
+    photo.src = data.photo;
+    photo.style.display = "block";
+    fallback.classList.add("hidden");
+  }else{
+    photo.removeAttribute("src");
+    photo.style.display = "none";
+    fallback.classList.remove("hidden");
+  }
+
+  document.getElementById("statProjects").textContent = data.statProjects;
+  document.getElementById("statSkills").textContent = data.statSkills;
+
+  document.getElementById("aboutDescription").textContent = data.aboutDescription;
+  document.querySelector("#about .section-heading h2").textContent = data.aboutTitle;
+
+  const details = [
+    ["Nama Lengkap",data.name],
+    ["Fokus",data.focus],
+    ["Brand",data.aboutBrand],
+    ["Prinsip",data.mindset]
+  ];
+
+  document.getElementById("personalDetails").innerHTML = details.map((item,index)=>`
+    <div class="detail">
+      <div class="detail-icon">
+        ${[
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg>',
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>',
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg>',
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m5 12 5 5L20 7"/></svg>'
+        ][index]}
+      </div>
+      <div><small>${escapeHTML(item[0])}</small><strong>${escapeHTML(item[1])}</strong></div>
+    </div>
+  `).join("");
+
+  document.getElementById("skillsGrid").innerHTML = data.skills.map(skill=>`
+    <div class="skill-card glass">
+      <div class="skill-logo"><i class="${escapeHTML(skill.icon || "")}"></i></div>
+      <h3>${escapeHTML(skill.name)}</h3>
+      <p>${escapeHTML(skill.description)}</p>
+    </div>
+  `).join("");
+
+  document.getElementById("skillsNote").textContent = data.skillsNote;
+  document.getElementById("projectsGrid").innerHTML = data.projects.map(project=>{
+    const url = safeURL(project.url);
+    return `
+      <article class="project-card glass">
+        <div class="project-cover"><span>${escapeHTML(project.cover || project.name)}</span></div>
+        <div class="project-content">
+          <div class="project-top">
+            <h3>${escapeHTML(project.name)}</h3>
+            <span class="project-type">${escapeHTML(project.type)}</span>
+          </div>
+          <p>${escapeHTML(project.description)}</p>
+          ${url ? `<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer" class="project-link">Lihat Proyek ↗</a>` : `<span class="project-link" style="opacity:.5">URL belum tersedia</span>`}
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  document.getElementById("journeyTimeline").innerHTML = data.journey.map(item=>`
+    <div class="timeline-item">
+      <span class="timeline-dot"></span>
+      <div class="timeline-card glass">
+        <small>${escapeHTML(item.label)}</small>
+        <h3>${escapeHTML(item.title)}</h3>
+        <p>${escapeHTML(item.description)}</p>
+      </div>
+    </div>
+  `).join("");
+
+  document.getElementById("contactTitle").textContent = data.contactTitle;
+  document.getElementById("contactDescription").textContent = data.contactDescription;
+
+  const socials = [
+    {name:"Telegram",url:safeURL(data.telegram),icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M22 2 11 13"/></svg>'},
+    {name:"GitHub",url:safeURL(data.github),icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.33-3.8-1.33-.5-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 .1.79 2.15 3.42 1.54.1-.73.39-1.23.7-1.52-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.29-.5-1.44.11-2.99 0 0 .95-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.13-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.99.72.79 1.16 1.79 1.16 3.02 0 4.33-2.63 5.29-5.14 5.56.4.35.75 1.03.75 2.08v3.12c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg>'}
+  ];
+
+  document.getElementById("contactLinks").innerHTML = socials.filter(item=>item.url).map(item=>`
+    <a href="${escapeHTML(item.url)}" target="_blank" rel="noopener noreferrer" class="contact-item">
+      <div class="contact-icon">${item.icon}</div><strong>${item.name}</strong>
+    </a>
+  `).join("");
+
+  document.getElementById("footerSocials").innerHTML = socials.filter(item=>item.url).map(item=>`
+    <a href="${escapeHTML(item.url)}" target="_blank" rel="noopener noreferrer" aria-label="${item.name}">${item.icon}</a>
+  `).join("");
+
+  setupScrollReveal();
+}
+
+/* ADMIN PANEL */
+let editingSkill = -1;
+let editingProject = -1;
+let editingJourney = -1;
+
+function value(id){
+  return document.getElementById(id).value.trim();
+}
+function setValue(id,val){
+  document.getElementById(id).value = val ?? "";
+}
+
+function renderAdmin(){
+  fillAdminFields();
+  renderAdminLists();
+}
+
+function fillAdminFields(){
+  const fields = {
+    editBrand:data.brand,
+    editName:data.name,
+    editRole:data.role,
+    editGreeting:data.greeting,
+    editHeroDescription:data.heroDescription,
+    editPhoto:data.photo,
+    editStatProjects:data.statProjects,
+    editStatSkills:data.statSkills,
+    editAboutTitle:data.aboutTitle,
+    editAboutDescription:data.aboutDescription,
+    editFocus:data.focus,
+    editAboutBrand:data.aboutBrand,
+    editMindset:data.mindset,
+    editContactTitle:data.contactTitle,
+    editContactDescription:data.contactDescription,
+    editTelegram:data.telegram,
+    editGithub:data.github,
+    editEmail:data.email,
+    editSkillsNote:data.skillsNote,
+    editPageTitle:data.pageTitle,
+    editMetaDescription:data.metaDescription
+  };
+  Object.entries(fields).forEach(([id,val])=>setValue(id,val));
+}
+
+function readAdminFields(){
+  data.brand = value("editBrand");
+  data.name = value("editName");
+  data.shortName = data.name.split(" ").slice(0,2).join(" ");
+  data.role = value("editRole");
+  data.greeting = value("editGreeting");
+  data.heroDescription = value("editHeroDescription");
+  data.photo = value("editPhoto");
+  data.statProjects = Number(value("editStatProjects")) || 0;
+  data.statSkills = Number(value("editStatSkills")) || 0;
+
+  data.aboutTitle = value("editAboutTitle");
+  data.aboutDescription = value("editAboutDescription");
+  data.focus = value("editFocus");
+  data.aboutBrand = value("editAboutBrand");
+  data.mindset = value("editMindset");
+
+  data.contactTitle = value("editContactTitle");
+  data.contactDescription = value("editContactDescription");
+  data.telegram = value("editTelegram");
+  data.github = value("editGithub");
+  data.email = value("editEmail");
+
+  data.skillsNote = value("editSkillsNote");
+  data.pageTitle = value("editPageTitle");
+  data.metaDescription = value("editMetaDescription");
+}
+
+document.querySelectorAll(".admin-tab").forEach(button=>{
+  button.addEventListener("click",()=>{
+    document.querySelectorAll(".admin-tab").forEach(item=>item.classList.remove("active"));
+    document.querySelectorAll(".admin-panel").forEach(item=>item.classList.remove("active"));
+    button.classList.add("active");
+    document.getElementById("panel-" + button.dataset.tab).classList.add("active");
+  });
+});
+
+function renderAdminLists(){
+  document.getElementById("adminSkillsList").innerHTML = data.skills.map((item,index)=>`
+    <div class="admin-list-item">
+      <div><strong>${escapeHTML(item.name)}</strong><small>${escapeHTML(item.description)}</small></div>
+      <div class="admin-list-actions">
+        <button class="small-btn" onclick="editSkill(${index})">Edit</button>
+        <button class="small-btn danger" onclick="deleteSkill(${index})">Hapus</button>
+      </div>
+    </div>
+  `).join("");
+
+  document.getElementById("adminProjectsList").innerHTML = data.projects.map((item,index)=>`
+    <div class="admin-list-item">
+      <div><strong>${escapeHTML(item.name)}</strong><small>${escapeHTML(item.url || "URL belum diisi")}</small></div>
+      <div class="admin-list-actions">
+        <button class="small-btn" onclick="editProject(${index})">Edit</button>
+        <button class="small-btn danger" onclick="deleteProject(${index})">Hapus</button>
+      </div>
+    </div>
+  `).join("");
+
+  document.getElementById("adminJourneyList").innerHTML = data.journey.map((item,index)=>`
+    <div class="admin-list-item">
+      <div><strong>${escapeHTML(item.title)}</strong><small>${escapeHTML(item.label)}</small></div>
+      <div class="admin-list-actions">
+        <button class="small-btn" onclick="editJourney(${index})">Edit</button>
+        <button class="small-btn danger" onclick="deleteJourney(${index})">Hapus</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+/* SKILL CRUD */
+document.getElementById("addSkill").addEventListener("click",()=>{
+  const item = {
+    name:value("skillName"),
+    description:value("skillDescription"),
+    icon:value("skillIcon")
+  };
+  if(!item.name){alert("Masukkan nama keahlian.");return;}
+
+  if(editingSkill >= 0){
+    data.skills[editingSkill] = item;
+  }else{
+    data.skills.push(item);
+  }
+
+  clearSkillForm();
+  renderAdminLists();
+});
+function editSkill(index){
+  const item = data.skills[index];
+  editingSkill = index;
+  setValue("skillName",item.name);
+  setValue("skillDescription",item.description);
+  setValue("skillIcon",item.icon);
+  document.getElementById("addSkill").textContent = "Simpan Edit";
+  document.getElementById("cancelSkillEdit").classList.remove("hidden");
+}
+function deleteSkill(index){
+  if(!confirm("Hapus keahlian ini?"))return;
+  data.skills.splice(index,1);
+  renderAdminLists();
+}
+function clearSkillForm(){
+  editingSkill = -1;
+  setValue("skillName","");
+  setValue("skillDescription","");
+  setValue("skillIcon","");
+  document.getElementById("addSkill").textContent = "Tambah Keahlian";
+  document.getElementById("cancelSkillEdit").classList.add("hidden");
+}
+document.getElementById("cancelSkillEdit").addEventListener("click",clearSkillForm);
+
+/* PROJECT CRUD */
+document.getElementById("addProject").addEventListener("click",()=>{
+  const item = {
+    name:value("projectName"),
+    type:value("projectType"),
+    description:value("projectDescription"),
+    url:value("projectUrl"),
+    cover:value("projectCover")
+  };
+  if(!item.name){alert("Masukkan nama proyek.");return;}
+  if(item.url && !safeURL(item.url)){alert("URL proyek harus menggunakan http:// atau https://");return;}
+
+  if(editingProject >= 0){
+    data.projects[editingProject] = item;
+  }else{
+    data.projects.push(item);
+  }
+
+  clearProjectForm();
+  renderAdminLists();
+});
+function editProject(index){
+  const item = data.projects[index];
+  editingProject = index;
+  setValue("projectName",item.name);
+  setValue("projectType",item.type);
+  setValue("projectDescription",item.description);
+  setValue("projectUrl",item.url);
+  setValue("projectCover",item.cover);
+  document.getElementById("addProject").textContent = "Simpan Edit";
+  document.getElementById("cancelProjectEdit").classList.remove("hidden");
+}
+function deleteProject(index){
+  if(!confirm("Hapus proyek ini?"))return;
+  data.projects.splice(index,1);
+  renderAdminLists();
+}
+function clearProjectForm(){
+  editingProject = -1;
+  ["projectName","projectType","projectDescription","projectUrl","projectCover"].forEach(id=>setValue(id,""));
+  document.getElementById("addProject").textContent = "Tambah Proyek";
+  document.getElementById("cancelProjectEdit").classList.add("hidden");
+}
+document.getElementById("cancelProjectEdit").addEventListener("click",clearProjectForm);
+
+/* JOURNEY CRUD */
+document.getElementById("addJourney").addEventListener("click",()=>{
+  const item = {
+    label:value("journeyLabel"),
+    title:value("journeyTitle"),
+    description:value("journeyDescription")
+  };
+  if(!item.title){alert("Masukkan judul perjalanan.");return;}
+
+  if(editingJourney >= 0){
+    data.journey[editingJourney] = item;
+  }else{
+    data.journey.push(item);
+  }
+
+  clearJourneyForm();
+  renderAdminLists();
+});
+function editJourney(index){
+  const item = data.journey[index];
+  editingJourney = index;
+  setValue("journeyLabel",item.label);
+  setValue("journeyTitle",item.title);
+  setValue("journeyDescription",item.description);
+  document.getElementById("addJourney").textContent = "Simpan Edit";
+  document.getElementById("cancelJourneyEdit").classList.remove("hidden");
+}
+function deleteJourney(index){
+  if(!confirm("Hapus bagian perjalanan ini?"))return;
+  data.journey.splice(index,1);
+  renderAdminLists();
+}
+function clearJourneyForm(){
+  editingJourney = -1;
+  ["journeyLabel","journeyTitle","journeyDescription"].forEach(id=>setValue(id,""));
+  document.getElementById("addJourney").textContent = "Tambah Perjalanan";
+  document.getElementById("cancelJourneyEdit").classList.add("hidden");
+}
+document.getElementById("cancelJourneyEdit").addEventListener("click",clearJourneyForm);
+
+/* SAVE */
+document.getElementById("saveAll").addEventListener("click",()=>{
+  readAdminFields();
+  saveData();
+});
+
+/* EXPORT */
+document.getElementById("exportData").addEventListener("click",()=>{
+  readAdminFields();
+  const blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "portfolio-data.json";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+/* IMPORT */
+document.getElementById("importDataButton").addEventListener("click",()=>{
+  document.getElementById("importDataFile").click();
+});
+document.getElementById("importDataFile").addEventListener("change",async event=>{
+  const file = event.target.files[0];
+  if(!file)return;
+  try{
+    const imported = JSON.parse(await file.text());
+    if(!imported || typeof imported !== "object")throw new Error("Invalid data");
+    data = {...clone(DEFAULT_DATA),...imported};
+    renderAdmin();
+    alert("Data berhasil dimuat. Klik Simpan Perubahan untuk menyimpan.");
+  }catch(error){
+    alert("File JSON tidak valid.");
+  }
+  event.target.value = "";
+});
+
+/* RESET */
+document.getElementById("resetData").addEventListener("click",()=>{
+  if(!confirm("Reset seluruh data portfolio ke pengaturan awal?"))return;
+  data = clone(DEFAULT_DATA);
+  renderAdmin();
+  saveData();
+});
+
+/* CONTACT FORM */
+document.getElementById("contactForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const form = event.currentTarget;
+  const button = document.getElementById("contactSubmit");
+  const status = document.getElementById("formStatus");
+
+  if(!form.reportValidity())return;
+
+  const original = button.textContent;
+  button.disabled = true;
+  button.textContent = "Mengirim...";
+  status.className = "form-status";
+  status.textContent = "";
+
+  try{
+    const formData = new FormData(form);
+    formData.append("_subject","Pesan Portfolio dari " + value("contactName"));
+    formData.append("_template","table");
+
+    const response = await fetch(
+      "https://formsubmit.co/ajax/" + encodeURIComponent(data.email),
+      {
+        method:"POST",
+        body:formData,
+        headers:{"Accept":"application/json"}
+      }
+    );
+
+    const result = await response.json();
+    if(!response.ok || result.success === false || result.success === "false"){
+      throw new Error("Gagal mengirim pesan");
+    }
+
+    status.className = "form-status success";
+    status.textContent = "Pesan berhasil dikirim. Terima kasih sudah menghubungi saya!";
+    form.reset();
+  }catch(error){
+    status.className = "form-status error";
+    status.textContent = "Pesan belum berhasil dikirim. Silakan coba lagi.";
+  }finally{
+    button.disabled = false;
+    button.textContent = original;
+  }
+});
+
+/* =====================================================
+   SCROLL REVEAL — ANIMASI BERULANG
+===================================================== */
+let scrollRevealObserver = null;
+
+function setupScrollReveal(){
+  if(scrollRevealObserver){
+    scrollRevealObserver.disconnect();
+    scrollRevealObserver = null;
+  }
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const targets = document.querySelectorAll(
+    "#publicApp .hero-content, #publicApp .hero-card, " +
+    "#publicApp .section-heading, #publicApp .about-card, " +
+    "#publicApp .skill-card, #publicApp .project-card, " +
+    "#publicApp .timeline-item, #publicApp .timeline-card, " +
+    "#publicApp .contact-card, #publicApp .contact-form-wrapper, " +
+    "#publicFooter .footer-content"
+  );
+
+  targets.forEach(element=>{
+    element.classList.add("scroll-reveal");
+
+    if(element.matches(".hero-card,.project-card")){
+      element.classList.add("from-zoom");
+    }else if(element.matches(".skill-card,.timeline-item:nth-child(odd)")){
+      element.classList.add("from-left");
+    }else if(element.matches(".timeline-item:nth-child(even)")){
+      element.classList.add("from-right");
+    }
+
+    const parent = element.parentElement;
+    const siblings = parent
+      ? Array.from(parent.children).filter(item=>item.classList.contains("scroll-reveal"))
+      : [];
+
+    const position = siblings.indexOf(element);
+    element.style.transitionDelay = position > 0
+      ? `${Math.min(position * 75,300)}ms`
+      : "0ms";
+  });
+
+  if(reduceMotion){
+    targets.forEach(element=>element.classList.add("is-visible"));
+    return;
+  }
+
+  if(!("IntersectionObserver" in window)){
+    targets.forEach(element=>element.classList.add("is-visible"));
+    return;
+  }
+
+  scrollRevealObserver = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      /*
+        Bagian penting:
+        - Masuk viewport: tambahkan is-visible.
+        - Keluar viewport: hapus is-visible.
+        - Tidak menggunakan unobserve().
+        Karena itu animasi bisa diputar lagi saat elemen
+        kembali masuk viewport.
+      */
+      entry.target.classList.toggle("is-visible",entry.isIntersecting);
+    });
+  },{
+    threshold:0.12,
+    rootMargin:"0px 0px -35px 0px"
+  });
+
+  targets.forEach(element=>scrollRevealObserver.observe(element));
+}
+
+/* THEME, MENU, SCROLL */
+function setTheme(theme){
+  document.documentElement.setAttribute("data-theme",theme);
+  try{localStorage.setItem("portfolio-theme",theme)}catch(error){}
+}
+let theme = "light";
+try{theme = localStorage.getItem("portfolio-theme") || "light"}catch(error){}
+setTheme(theme);
+
+document.getElementById("themeToggle").addEventListener("click",()=>{
+  const current = document.documentElement.getAttribute("data-theme");
+  setTheme(current === "dark" ? "light" : "dark");
+});
+document.getElementById("adminThemeToggle").addEventListener("click",()=>{
+  const current = document.documentElement.getAttribute("data-theme");
+  setTheme(current === "dark" ? "light" : "dark");
+});
+
+const navLinks = document.getElementById("navLinks");
+document.getElementById("menuBtn").addEventListener("click",()=>{
+  navLinks.classList.toggle("open");
+});
+navLinks.querySelectorAll("a").forEach(link=>{
+  link.addEventListener("click",()=>navLinks.classList.remove("open"));
+});
+
+const backTop = document.getElementById("backTop");
+window.addEventListener("scroll",()=>{
+  backTop.classList.toggle("show",window.scrollY > 450);
+},{passive:true});
+backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* INITIAL RENDER */
+renderPortfolio();
+handleRoute();
+</script>
+
+</body>
+</html>
