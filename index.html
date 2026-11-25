@@ -1422,24 +1422,57 @@ function setupScrollReveal(){
 
 /* LANGUAGE SWITCH — ID / EN */
 const languageDictionary = {
-  "Beranda":"Home","Tentang":"About","Keahlian":"Skills","Proyek":"Projects","Perjalanan":"Journey","Kontak":"Contact",
-  "Halo, saya":"Hello, I'm","Hubungi Saya":"Contact Me","Proyek Unggulan.":"Featured Projects.","Proyek Unggulan":"Featured Projects",
-  "Kenali saya":"Get to know me","Tentang Saya.":"About Me.","Sedikit perkenalan tentang diri saya dan hal-hal yang saya sukai.":"A little introduction about me and the things I enjoy.",
+  "Beranda":"Home","Tentang":"About","Keahlian":"Skills","Proyek":"Projects","Perjalanan":"Journey","Kontak":"Contact","Pengaturan":"Settings",
+  "Halo, saya":"Hello, I'm","Hubungi Saya":"Contact Me","Proyek Unggulan.":"Featured Projects.","Kenali saya":"Get to know me","Tentang Saya.":"About Me.",
+  "Sedikit perkenalan tentang diri saya dan hal-hal yang saya sukai.":"A little introduction about me and the things I enjoy.",
   "Siapa Saya?":"Who Am I?","Informasi Pribadi":"Personal Information","Nama Lengkap":"Full Name","Fokus":"Focus","Prinsip":"Principles",
-  "Hal yang saya pelajari":"What I'm Learning","Teknologi & Tools.":"Technology & Tools.","Teknologi dan tools yang saya gunakan untuk belajar serta mengembangkan proyek digital.":"Technologies and tools I use to learn and build digital projects.",
-  "Karya pilihan":"Selected work","Kumpulan proyek digital dan ide yang sedang saya kembangkan.":"A collection of digital projects and ideas I'm developing.",
-  "Perkembangan saya":"My progress","Perjalanan Saya.":"My Journey.","Setiap proyek adalah kesempatan baru untuk mempelajari sesuatu.":"Every project is a new opportunity to learn something.",
-  "Mari terhubung":"Let's connect","Punya ide?":"Have an idea?","Kirim Pesan":"Send a Message","Punya pertanyaan atau ide? Kirim pesan melalui formulir di bawah ini.":"Have a question or an idea? Send me a message using the form below.",
-  "Nama":"Name","Pesan":"Message","Kirim Pesan":"Send Message","Pesan akan dikirim ke email admin.":"Your message will be sent to the admin email.",
+  "Hal yang saya pelajari":"What I'm Learning","Teknologi & Tools.":"Technology & Tools.",
+  "Teknologi dan tools yang saya gunakan untuk belajar serta mengembangkan proyek digital.":"Technologies and tools I use to learn and build digital projects.",
+  "Karya pilihan":"Selected Work","Proyek Unggulan":"Featured Projects","Kumpulan proyek digital dan ide yang sedang saya kembangkan.":"A collection of digital projects and ideas I'm developing.",
+  "Perkembangan saya":"My Progress","Perjalanan Saya.":"My Journey.","Setiap proyek adalah kesempatan baru untuk mempelajari sesuatu.":"Every project is an opportunity to learn something new.",
+  "Mari terhubung":"Let's Connect","Punya ide?":"Have an idea?","Kirim Pesan":"Send Message",
+  "Punya pertanyaan atau ide? Kirim pesan melalui formulir di bawah ini.":"Have a question or an idea? Send me a message using the form below.",
+  "Nama":"Name","Pesan":"Message","Email":"Email","Masukkan nama kamu":"Enter your name","nama@email.com":"name@email.com",
+  "Tuliskan pesan kamu di sini...":"Write your message here...","Pesan akan dikirim ke email admin.":"Your message will be sent to the admin email.",
   "Lihat Proyek ↗":"View Project ↗","URL belum tersedia":"URL not available","Hak cipta dilindungi.":"All rights reserved.",
-  "Panel Pengelola.":"Admin Panel.","Kelola informasi dan konten website portfolio kamu.":"Manage your portfolio website information and content.","Lihat Website ↗":"View Website ↗",
-  "Identitas":"Identity","Tentang Saya":"About Me","Keahlian":"Skills","Proyek":"Projects","Perjalanan":"Journey","Kontak":"Contact","Pengaturan":"Settings",
-  "Identitas Portfolio":"Portfolio Identity","Atur nama, headline, foto, dan informasi utama yang tampil di halaman depan.":"Set the name, headline, photo, and main information shown on the homepage.",
-  "Nama brand / logo":"Brand / Logo Name","Nama lengkap":"Full Name","Jabatan / profesi":"Role / Profession","Kalimat pembuka":"Greeting","Deskripsi utama":"Main Description","URL foto profil":"Profile Photo URL",
-  "Daftar Proyek":"Project List","Tambah Keahlian":"Add Skill","Tambah Proyek":"Add Project","Tambah Perjalanan":"Add Journey","Batal Edit":"Cancel Edit",
-  "Simpan Perubahan":"Save Changes","Perubahan belum disimpan.":"Changes not saved yet.","Perubahan berhasil disimpan di browser ini.":"Changes saved in this browser.",
-  "Nama proyek":"Project Name","Kategori":"Category","Deskripsi":"Description","URL proyek":"Project URL","Informasi Kontak":"Contact Information",
-  "Pengaturan Website":"Website Settings","Reset Data Awal":"Reset Default Data","Edit":"Edit","Hapus":"Delete"
+  "Panel Pengelola.":"Admin Panel.","Kelola informasi dan konten website portfolio kamu.":"Manage your portfolio website information and content.",
+  "Lihat Website ↗":"View Website ↗","Identitas":"Identity","Tentang Saya":"About Me","Daftar Proyek":"Project List",
+  "Identitas Portfolio":"Portfolio Identity","Atur nama, headline, foto, dan informasi utama yang tampil di halaman depan.":"Set the name, headline, photo, and key information displayed on the homepage.",
+  "Nama brand / logo":"Brand / Logo Name","Nama lengkap":"Full Name","Jabatan / profesi":"Role / Profession","Kalimat pembuka":"Greeting",
+  "Deskripsi utama":"Main Description","URL foto profil":"Profile Photo URL","Jumlah proyek (statistik)":"Number of projects (statistics)",
+  "Jumlah minat (statistik)":"Number of interests (statistics)","Atur deskripsi dan detail informasi pribadi.":"Edit your description and personal information.",
+  "Judul bagian":"Section Title","Deskripsi tentang saya":"About Me Description","Fokus utama":"Main Focus","Brand":"Brand","Prinsip / motto":"Principle / Motto",
+  "Keahlian & Teknologi":"Skills & Technologies","Tambah, ubah, atau hapus teknologi yang tampil pada portfolio.":"Add, edit, or remove technologies displayed on the portfolio.",
+  "Nama keahlian":"Skill Name","Keterangan":"Details","Class ikon Devicon (opsional)":"Devicon icon class (optional)",
+  "Tambah Keahlian":"Add Skill","Batal Edit":"Cancel Edit","Daftar Proyek":"Project List",
+  "Atur nama, kategori, deskripsi, dan URL tujuan tombol proyek.":"Edit project names, categories, descriptions, and destination URLs.",
+  "Nama proyek":"Project Name","Kategori":"Category","Deskripsi":"Description","URL proyek":"Project URL","Teks cover":"Cover Text",
+  "Tambah Proyek":"Add Project","Kelola timeline perjalanan belajar dan perkembangan kamu.":"Manage your learning and development timeline.",
+  "Label / periode":"Label / Period","Judul":"Title","Tambah Perjalanan":"Add Journey","Informasi Kontak":"Contact Information",
+  "Atur tujuan tautan media sosial dan email penerima formulir.":"Set social media link destinations and the email address that receives form submissions.",
+  "Judul kontak":"Contact Heading","Deskripsi kontak":"Contact Description","Username / URL Telegram":"Telegram Username / URL",
+  "URL GitHub":"GitHub URL","Email penerima formulir":"Form Recipient Email","Pengaturan Website":"Website Settings",
+  "Pengaturan tambahan dan pengelolaan data portfolio.":"Additional settings and portfolio data management.",
+  "Catatan keahlian":"Skills Note","Judul halaman browser":"Browser Page Title","Deskripsi SEO":"SEO Description",
+  "Reset Data Awal":"Reset Default Data","Perubahan belum disimpan.":"Changes have not been saved.",
+  "Simpan Perubahan":"Save Changes","Export Data JSON":"Export JSON Data","Import Data JSON":"Import JSON Data",
+  "Edit":"Edit","Hapus":"Delete","URL belum diisi":"URL not provided",
+  "Seorang developer muda dan penggemar dunia digital yang senang menjelajahi teknologi, membangun produk digital, dan mengubah ide menjadi sesuatu yang bermakna.":"A young developer and digital enthusiast who enjoys exploring technology, building digital products, and turning ideas into something meaningful.",
+  "Tentang Saya.":"About Me.","Saya Naren Ardhana Suryakencana, seseorang yang memiliki ketertarikan pada teknologi dan kreativitas digital. Saya senang mempelajari cara kerja website, aplikasi, API, dan server.":"I'm Naren Ardhana Suryakencana, with an interest in technology and digital creativity. I enjoy learning how websites, applications, APIs, and servers work.",
+  "Saya percaya setiap proyek hebat dimulai dari rasa ingin tahu, eksperimen, dan keberanian untuk terus belajar.":"I believe every great project starts with curiosity, experimentation, and the courage to keep learning.",
+  "Pengembangan Web & Teknologi":"Web Development & Technology",
+  "Daftar ini mencakup teknologi yang sedang saya pelajari dan eksplorasi.":"This list includes technologies I'm currently learning and exploring.",
+  "Platform Web":"Web Platform","Platform Anime":"Anime Platform","Komunitas":"Community","Toko Digital":"Digital Store",
+  "Platform digital independen yang berfokus pada layanan web, hosting, dan berbagai produk digital.":"An independent digital platform focused on web services, hosting, and various digital products.",
+  "Platform digital bertema anime dengan fitur penemuan konten, pencarian, dan pengalaman menonton personal.":"An anime-focused digital platform featuring content discovery, search, and a personalized viewing experience.",
+  "Proyek komunitas digital yang berfokus pada anime, kreativitas, dan partisipasi anggota.":"A digital community project focused on anime, creativity, and member participation.",
+  "Konsep toko digital yang dirancang untuk menyediakan produk dan layanan online dengan mudah.":"A digital store concept designed to make online products and services easily accessible.",
+  "AWAL PERJALANAN":"THE BEGINNING","TAHAP BELAJAR":"LEARNING STAGE","TAHAP MEMBANGUN":"BUILDING STAGE","TERUS BERKEMBANG":"CONTINUOUS GROWTH",
+  "Mengenal Teknologi":"Discovering Technology","Mulai mengeksplorasi teknologi, website, dan cara kerja produk digital di balik layar.":"Started exploring technology, websites, and how digital products work behind the scenes.",
+  "Mengeksplorasi Web Development":"Exploring Web Development","Mempelajari HTML, CSS, JavaScript, API, dan dasar-dasar membangun website interaktif.":"Learning HTML, CSS, JavaScript, APIs, and the fundamentals of building interactive websites.",
+  "Membuat Proyek Digital":"Building Digital Projects","Mulai mengembangkan proyek mandiri dan bereksperimen dengan berbagai ide serta teknologi.":"Started developing independent projects and experimenting with different ideas and technologies.",
+  "Terus Belajar & Berkarya":"Continuing to Learn & Create","Terus meningkatkan kemampuan, mengeksplorasi teknologi baru, dan mengembangkan pengalaman digital yang lebih baik.":"Continuously improving skills, exploring new technologies, and creating better digital experiences.",
+  "Tertarik dengan proyek, kolaborasi, atau sekadar ingin menyapa? Silakan hubungi saya.":"Interested in a project, collaboration, or just want to say hello? Feel free to contact me."
 };
 let currentLanguage = "id";
 try { currentLanguage = localStorage.getItem("portfolio-language") || "id"; } catch(error) {}
@@ -1459,16 +1492,32 @@ function applyLanguage(){
     const original = node.nodeValue;
     const trimmed = original.trim();
     if(!trimmed) return;
-    let translated = trimmed;
-    if(currentLanguage === "en"){
-      translated = languageDictionary[trimmed] || trimmed;
-    }else{
-      const reverse = Object.entries(languageDictionary).find(([,value])=>value === trimmed);
-      translated = reverse ? reverse[0] : trimmed;
-    }
-    if(translated !== trimmed){
-      node.nodeValue = original.replace(trimmed,translated);
-    }
+    const reverse = Object.entries(languageDictionary).find(([,value])=>value === trimmed);
+    const translated = currentLanguage === "en"
+      ? (languageDictionary[trimmed] || trimmed)
+      : (reverse ? reverse[0] : trimmed);
+    if(translated !== trimmed) node.nodeValue = original.replace(trimmed,translated);
+  });
+
+  // Translate common form attributes as well as visible text.
+  const attributeMap = {
+    "Masukkan nama kamu":"Enter your name",
+    "nama@email.com":"name@email.com",
+    "Tuliskan pesan kamu di sini...":"Write your message here...",
+    "https://domain.com/foto.jpg":"https://domain.com/photo.jpg",
+    "https://website-proyek.com":"https://project-website.com",
+    "Nama proyek":"Project Name",
+    "Website / Aplikasi":"Website / Application",
+    "Nama singkat untuk cover":"Short name for the cover"
+  };
+  document.querySelectorAll("[placeholder],[aria-label],[title]").forEach(el=>{
+    ["placeholder","aria-label","title"].forEach(attr=>{
+      const value = el.getAttribute(attr);
+      if(!value) return;
+      const reverse = Object.entries(attributeMap).find(([,v])=>v===value);
+      const next = currentLanguage==="en" ? (attributeMap[value] || value) : (reverse ? reverse[0] : value);
+      if(next!==value) el.setAttribute(attr,next);
+    });
   });
 }
 
