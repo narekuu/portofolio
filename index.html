@@ -553,9 +553,9 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
         <span class="eyebrow">NAREKUU ADMIN</span>
         <h1>Masuk ke Panel.</h1>
         <p>Gunakan akun admin yang terdaftar di Supabase Auth.</p>
-        <form id="adminLoginForm" class="admin-form">
-          <div class="admin-field"><label for="adminEmail">Email admin</label><input id="adminEmail" type="email" name="username" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="admin@narekuu.my.id" required></div>
-          <div class="admin-field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Masukkan password" required></div>
+        <form id="adminLoginForm" class="admin-form" autocomplete="off">
+          <div class="admin-field"><label for="adminEmail">Email admin</label><input id="adminEmail" type="email" name="email" value="" autocomplete="off" autocapitalize="none" spellcheck="false" required></div>
+          <div class="admin-field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" name="password" value="" autocomplete="new-password" required></div>
           <button class="btn btn-primary" id="adminLoginButton" type="submit">Masuk</button>
           <p id="adminLoginStatus" class="admin-login-status" role="status" aria-live="polite"></p>
         </form>
