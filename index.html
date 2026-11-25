@@ -717,7 +717,7 @@ const DEFAULT_DATA = {
   role:"Developer · Creator · Explorer",
   greeting:"Halo, saya",
   heroDescription:"Seorang developer muda dan penggemar dunia digital yang senang menjelajahi teknologi, membangun produk digital, dan mengubah ide menjadi sesuatu yang bermakna.",
-  photo:"https://www.image2url.com/r2/default/images/1795624486398-8dee6303-439b-468-bb79-b9f612a96e33.png",
+  photo:"/assets/profile.jpg",
   statProjects:4,
   statSkills:5,
 
@@ -774,8 +774,9 @@ function loadData(){
     if(saved){
       const parsed = JSON.parse(saved);
       const merged = {...clone(DEFAULT_DATA),...parsed};
-      // Data lama di localStorage tidak boleh mengosongkan foto profil default.
-      if(!merged.photo || !String(merged.photo).trim()){
+      // Migrasikan foto eksternal lama ke aset lokal.
+      const oldPhoto = "https://www.image2url.com/r2/default/images/1795624486398-8dee6303-439b-468b-bb79-b9f612a96e33.png";
+      if(!merged.photo || !String(merged.photo).trim() || merged.photo === oldPhoto){
         merged.photo = DEFAULT_DATA.photo;
       }
       return merged;
