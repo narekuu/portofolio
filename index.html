@@ -374,14 +374,14 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
 
 <!-- PUBLIC NAVIGATION -->
 <nav class="navbar" id="publicNavbar">
-  <a href="/portofolio/" class="logo" id="brandLogo">NAREN<span>.</span></a>
+  <a href="/" class="logo" id="brandLogo">NAREN<span>.</span></a>
   <div class="nav-links" id="navLinks">
-    <a href="/portofolio/" data-route="home">Beranda</a>
-    <a href="/portofolio/tentang" data-route="about">Tentang</a>
-    <a href="/portofolio/keahlian" data-route="skills">Keahlian</a>
-    <a href="/portofolio/proyek" data-route="projects">Proyek</a>
-    <a href="/portofolio/perjalanan" data-route="journey">Perjalanan</a>
-    <a href="/portofolio/kontak" data-route="contact">Kontak</a>
+    <a href="/" data-route="home">Beranda</a>
+    <a href="/tentang" data-route="about">Tentang</a>
+    <a href="/keahlian" data-route="skills">Keahlian</a>
+    <a href="/proyek" data-route="projects">Proyek</a>
+    <a href="/perjalanan" data-route="journey">Perjalanan</a>
+    <a href="/kontak" data-route="contact">Kontak</a>
   </div>
   <div class="nav-actions">
     <button class="icon-btn" id="languageToggle" aria-label="Ganti bahasa">ID</button>
@@ -396,10 +396,10 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
 
 <!-- ADMIN NAVIGATION -->
 <nav class="navbar hidden" id="adminNavbar">
-  <a href="/portofolio/" class="logo">PORTFOLIO<span>.</span></a>
+  <a href="/" class="logo">PORTFOLIO<span>.</span></a>
   <div style="font-size:10px;color:var(--muted);font-weight:800">DEVELOPER PANEL</div>
   <div class="nav-actions">
-    <a href="/portofolio/" class="icon-btn" title="Lihat website">
+    <a href="/" class="icon-btn" title="Lihat website">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7M10 14 21 3M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>
     </a>
     <button class="icon-btn" id="adminThemeToggle" aria-label="Ganti tema">
@@ -416,10 +416,10 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
       <h1><span id="heroGreeting">Halo, saya</span><br><span id="heroName">Naren Ardhana.</span></h1>
       <p class="hero-description" id="heroDescription"></p>
       <div class="hero-buttons">
-        <a href="/portofolio/proyek" class="btn btn-primary">Lihat Proyek
+        <a href="/proyek" class="btn btn-primary">Lihat Proyek
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
         </a>
-        <a href="/portofolio/kontak" class="btn btn-secondary">Hubungi Saya</a>
+        <a href="/kontak" class="btn btn-secondary">Hubungi Saya</a>
       </div>
     </div>
 
@@ -547,7 +547,7 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
           <h1>Panel Pengelola.</h1>
           <p>Kelola informasi dan konten website portfolio kamu.</p>
         </div>
-        <a href="/portofolio/" class="btn btn-secondary">Lihat Website ↗</a>
+        <a href="/" class="btn btn-secondary">Lihat Website ↗</a>
       </div>
 
       <div class="admin-notice">
@@ -797,7 +797,7 @@ function saveData(){
 }
 
 /* ROUTING */
-const BASE_PATH = "/portofolio";
+const BASE_PATH = "";
 const routeMap = {
   home:"/",
   about:"/tentang",
