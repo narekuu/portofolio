@@ -552,7 +552,7 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
       <div class="admin-login-card glass hidden" id="adminLoginCard">
         <span class="eyebrow">NAREKUU ADMIN</span>
         <h1>Masuk ke Panel.</h1>
-        <p>Gunakan akun admin yang terdaftar di Supabase Auth.</p>
+        <p>Gunakan akun biasa yang terdaftar di Supabase Auth.</p>
         <form id="adminLoginForm" class="admin-form" autocomplete="off">
           <div class="admin-field"><label for="adminEmail">Email admin</label><input id="adminEmail" type="email" name="email" value="" autocomplete="off" autocapitalize="none" spellcheck="false" required></div>
           <div class="admin-field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" name="password" value="" autocomplete="new-password" required></div>
@@ -570,7 +570,7 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
       </div>
 
       <div class="admin-notice">
-        Panel terhubung ke Supabase. Perubahan yang disimpan akan tampil untuk semua pengunjung website. Akses edit hanya diberikan kepada akun admin yang diizinkan.
+        Panel terhubung ke Supabase. Semua akun biasa yang berhasil login melalui Supabase Auth dapat mengelola konten. Perubahan yang disimpan akan tampil untuk semua pengunjung website.
       </div>
 
       <div class="admin-layout">
@@ -785,7 +785,9 @@ function clone(value){
 
 const SUPABASE_URL = "https://dbufotijndinnblqzcvw.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_nORP-2HwalTqAwW2GRA3OQ_mTYbBgVA";
-const ADMIN_EMAIL = "admin@narekuu.my.id";
+function isPortfolioAdmin(user){
+  return Boolean(user?.id && user?.is_anonymous !== true);
+}
 const supabaseClient = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
 let data = clone(DEFAULT_DATA);
 let adminSession = null;
@@ -834,37 +836,32 @@ function setAdminVisibility(isAdmin){
 
 document.getElementById("adminLoginForm").addEventListener("submit",async event=>{
   event.preventDefault();
-  const email = document.getElementById("adminEmail").value.trim().toLowerCase();
+  const email = document.getElementById("adminEmail").value.trim();
   const password = document.getElementById("adminPassword").value;
   const status = document.getElementById("adminLoginStatus");
   const button = document.getElementById("adminLoginButton");
   status.className = "admin-login-status";
-  if(email !== ADMIN_EMAIL){
-    status.classList.add("error");
-    status.textContent = "Akun ini tidak memiliki akses admin.";
-    return;
-  }
   button.disabled = true;
   button.textContent = "Memeriksa...";
   try{
     const {data:loginData,error} = await supabaseClient.auth.signInWithPassword({email,password});
     if(error) throw error;
-    if(loginData.user?.email?.toLowerCase() !== ADMIN_EMAIL){
+    if(!isPortfolioAdmin(loginData.user)){
       await supabaseClient.auth.signOut();
-      throw new Error("Akun ini tidak memiliki akses admin.");
+      throw new Error("Akun anonim tidak memiliki akses panel.");
     }
-    status.classList.remove("error");
+    status.classList.add("success");
     status.textContent = "Login berhasil. Membuka panel...";
   }catch(error){
     console.error("Supabase login error:",error);
     status.classList.add("error");
     const message = String(error?.message || "").toLowerCase();
     if(message.includes("invalid login credentials")){
-      status.textContent = "Email admin belum terdaftar di Supabase Auth atau password tidak cocok. Pastikan akun admin sudah dibuat pada project Supabase yang terhubung.";
+      status.textContent = "Email atau password tidak cocok. Pastikan akun sudah terdaftar di Supabase Auth.";
     }else if(message.includes("email not confirmed")){
-      status.textContent = "Email admin belum dikonfirmasi. Konfirmasi akun melalui Supabase Auth terlebih dahulu.";
-    }else if(message.includes("tidak memiliki akses")){
-      status.textContent = "Akun ini tidak memiliki akses admin.";
+      status.textContent = "Email belum dikonfirmasi. Konfirmasi akun melalui Supabase Auth terlebih dahulu.";
+    }else if(message.includes("anonim")){
+      status.textContent = "Akun anonim tidak memiliki akses panel. Gunakan akun Supabase Auth biasa.";
     }else{
       status.textContent = "Login gagal: " + (error?.message || "periksa koneksi Supabase.");
     }
@@ -880,10 +877,7 @@ document.getElementById("adminLogout").addEventListener("click",async()=>{
 
 supabaseClient.auth.onAuthStateChange((_event,session)=>{
   const user = session?.user || null;
-  adminSession = user && user.email?.toLowerCase() === ADMIN_EMAIL ? session : null;
-  if(user && !adminSession){
-    supabaseClient.auth.signOut();
-  }
+  adminSession = isPortfolioAdmin(user) ? session : null;
   setAdminVisibility(Boolean(adminSession));
 });
 
@@ -891,7 +885,7 @@ async function initializeSupabase(){
   try{
     const {data:sessionData} = await supabaseClient.auth.getSession();
     const user = sessionData?.session?.user || null;
-    adminSession = user && user.email?.toLowerCase() === ADMIN_EMAIL ? sessionData.session : null;
+    adminSession = isPortfolioAdmin(user) ? sessionData.session : null;
     setAdminVisibility(Boolean(adminSession));
     await loadRemotePortfolio();
   }catch(error){
