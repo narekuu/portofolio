@@ -259,6 +259,12 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
 
 /* ADMIN */
 .admin-page{padding:115px 0 50px;min-height:100vh}
+.admin-login-card{max-width:440px;margin:30px auto;padding:30px}
+.admin-login-card h1{font-size:27px;margin:8px 0}
+.admin-login-card>p{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:22px}
+.admin-login-status{min-height:18px;font-size:11px;color:var(--muted);line-height:1.6}
+.admin-login-status.error{color:#d45b5b}
+.admin-login-status.success{color:#247a50}
 .admin-header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
 .admin-header h1{font-size:28px;letter-spacing:-1px}
 .admin-header p{font-size:11px;color:var(--muted);margin-top:6px}
@@ -368,6 +374,7 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
   }
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/dist/umd/supabase.min.js"></script>
 </head>
 
 <body>
@@ -402,6 +409,7 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
     <a href="/" class="icon-btn" title="Lihat website">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7M10 14 21 3M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>
     </a>
+    <button class="icon-btn" id="adminLogout" type="button" title="Keluar dari panel">Keluar</button>
     <button class="icon-btn" id="adminThemeToggle" aria-label="Ganti tema">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
     </button>
@@ -541,6 +549,17 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
 <main id="adminApp" class="hidden">
   <section class="admin-page">
     <div class="container">
+      <div class="admin-login-card glass hidden" id="adminLoginCard">
+        <span class="eyebrow">NAREKUU ADMIN</span>
+        <h1>Masuk ke Panel.</h1>
+        <p>Gunakan akun admin yang terdaftar di Supabase Auth.</p>
+        <form id="adminLoginForm" class="admin-form">
+          <div class="admin-field"><label for="adminEmail">Email admin</label><input id="adminEmail" type="email" autocomplete="username" value="admin@narekuu.my.id" required></div>
+          <div class="admin-field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Masukkan password" required></div>
+          <button class="btn btn-primary" id="adminLoginButton" type="submit">Masuk</button>
+          <p id="adminLoginStatus" class="admin-login-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
       <div class="admin-header">
         <div>
           <span class="eyebrow">PORTFOLIO MANAGEMENT</span>
@@ -551,9 +570,7 @@ footer{padding:32px 0;margin-top:45px;border-top:1px solid var(--line)}
       </div>
 
       <div class="admin-notice">
-        Mode awal: perubahan disimpan di browser ini menggunakan localStorage.
-        Untuk mengelola website secara online dari perangkat lain, panel perlu dihubungkan ke backend dan database.
-        Jangan gunakan versi ini sebagai panel admin produksi sebelum autentikasi server ditambahkan.
+        Panel terhubung ke Supabase. Perubahan yang disimpan akan tampil untuk semua pengunjung website. Akses edit hanya diberikan kepada akun admin yang diizinkan.
       </div>
 
       <div class="admin-layout">
@@ -762,38 +779,104 @@ const DEFAULT_DATA = {
   metaDescription:"Personal Portfolio — Developer and Digital Creator"
 };
 
-let data = loadData();
-
 function clone(value){
   return JSON.parse(JSON.stringify(value));
 }
 
-function loadData(){
-  try{
-    const saved = localStorage.getItem("portfolio-content-v1");
-    if(saved){
-      const parsed = JSON.parse(saved);
-      const merged = {...clone(DEFAULT_DATA),...parsed};
-      // Migrasikan foto eksternal lama ke aset lokal.
-      const oldPhoto = "https://www.image2url.com/r2/default/images/1795624486398-8dee6303-439b-468b-bb79-b9f612a96e33.png";
-      if(!merged.photo || !String(merged.photo).trim() || merged.photo === oldPhoto){
-        merged.photo = DEFAULT_DATA.photo;
-      }
-      return merged;
-    }
-  }catch(error){}
-  return clone(DEFAULT_DATA);
+const SUPABASE_URL = "https://dbufotijndinnblqzcvw.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_nORP-2HwalTqAwW2GRA3OQ_mTYbBgVA";
+const ADMIN_EMAIL = "admin@narekuu.my.id";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+let data = clone(DEFAULT_DATA);
+let adminSession = null;
+
+async function loadRemotePortfolio(){
+  const {data:row,error} = await supabaseClient
+    .from("portfolio_content")
+    .select("content")
+    .eq("id",1)
+    .maybeSingle();
+  if(error) throw error;
+  if(row && row.content){
+    data = {...clone(DEFAULT_DATA),...row.content};
+    renderPortfolio();
+  }
 }
 
-function saveData(){
+async function saveData(){
+  const status = document.getElementById("saveStatus");
+  status.textContent = "Menyimpan ke database...";
   try{
-    localStorage.setItem("portfolio-content-v1",JSON.stringify(data));
-    document.getElementById("saveStatus").textContent = "Perubahan berhasil disimpan di browser ini.";
+    const {error} = await supabaseClient
+      .from("portfolio_content")
+      .upsert({id:1,content:data,updated_at:new Date().toISOString()},{onConflict:"id"});
+    if(error) throw error;
+    status.textContent = "Berhasil disimpan ke Supabase. Website publik sudah diperbarui.";
     renderPortfolio();
     return true;
   }catch(error){
-    document.getElementById("saveStatus").textContent = "Gagal menyimpan data.";
+    console.error("Supabase save error:",error);
+    status.textContent = "Gagal menyimpan. Periksa koneksi atau akses akun admin.";
     return false;
+  }
+}
+
+function setAdminVisibility(isAdmin){
+  const login = document.getElementById("adminLoginCard");
+  login.classList.toggle("hidden",isAdmin);
+  ["admin-header","admin-notice","admin-layout","admin-save"].forEach(selector=>{
+    const element = document.querySelector("#adminApp ." + selector);
+    if(element) element.classList.toggle("hidden",!isAdmin);
+  });
+  document.getElementById("adminLogout").classList.toggle("hidden",!isAdmin);
+  if(isAdmin) renderAdmin();
+}
+
+document.getElementById("adminLoginForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const email = document.getElementById("adminEmail").value.trim().toLowerCase();
+  const password = document.getElementById("adminPassword").value;
+  const status = document.getElementById("adminLoginStatus");
+  const button = document.getElementById("adminLoginButton");
+  status.className = "admin-login-status";
+  if(email !== ADMIN_EMAIL){
+    status.classList.add("error");
+    status.textContent = "Akun ini tidak memiliki akses admin.";
+    return;
+  }
+  button.disabled = true;
+  button.textContent = "Memeriksa...";
+  const {error} = await supabaseClient.auth.signInWithPassword({email,password});
+  button.disabled = false;
+  button.textContent = "Masuk";
+  if(error){
+    status.classList.add("error");
+    status.textContent = "Login gagal. Periksa email dan password.";
+  }
+});
+
+document.getElementById("adminLogout").addEventListener("click",async()=>{
+  await supabaseClient.auth.signOut();
+});
+
+supabaseClient.auth.onAuthStateChange((_event,session)=>{
+  const user = session?.user || null;
+  adminSession = user && user.email?.toLowerCase() === ADMIN_EMAIL ? session : null;
+  if(user && !adminSession){
+    supabaseClient.auth.signOut();
+  }
+  setAdminVisibility(Boolean(adminSession));
+});
+
+async function initializeSupabase(){
+  try{
+    const {data:sessionData} = await supabaseClient.auth.getSession();
+    const user = sessionData?.session?.user || null;
+    adminSession = user && user.email?.toLowerCase() === ADMIN_EMAIL ? sessionData.session : null;
+    setAdminVisibility(Boolean(adminSession));
+    await loadRemotePortfolio();
+  }catch(error){
+    console.error("Supabase initialization error:",error);
   }
 }
 
@@ -819,7 +902,7 @@ function navigate(path){
 
 function handleRoute(){
   const path = getCurrentPath();
-  const adminPath = BASE_PATH + "/pdev";
+  const adminPaths = [BASE_PATH + "/pdev",BASE_PATH + "/portofolio/pdev"];
   const publicApp = document.getElementById("publicApp");
   const adminApp = document.getElementById("adminApp");
   const publicNavbar = document.getElementById("publicNavbar");
@@ -827,14 +910,14 @@ function handleRoute(){
   const footer = document.getElementById("publicFooter");
   const backTop = document.getElementById("backTop");
 
-  if(path === adminPath || path === adminPath + "/"){
+  if(adminPaths.some(adminPath=>path === adminPath || path === adminPath + "/")){
     publicApp.classList.add("hidden");
     publicNavbar.classList.add("hidden");
     footer.classList.add("hidden");
     adminApp.classList.remove("hidden");
     adminNavbar.classList.remove("hidden");
     backTop.classList.add("hidden");
-    renderAdmin();
+    setAdminVisibility(Boolean(adminSession));
     return;
   }
 
@@ -1255,9 +1338,9 @@ function clearJourneyForm(){
 document.getElementById("cancelJourneyEdit").addEventListener("click",clearJourneyForm);
 
 /* SAVE */
-document.getElementById("saveAll").addEventListener("click",()=>{
+document.getElementById("saveAll").addEventListener("click",async()=>{
   readAdminFields();
-  saveData();
+  await saveData();
 });
 
 /* EXPORT */
@@ -1564,6 +1647,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 /* INITIAL RENDER */
 renderPortfolio();
 handleRoute();
+initializeSupabase();
 </script>
 
 </body>
