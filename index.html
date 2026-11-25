@@ -1011,6 +1011,7 @@ function renderPortfolio(){
   `).join("");
 
   setupScrollReveal();
+  applyLanguage();
 }
 
 /* ADMIN PANEL */
@@ -1417,6 +1418,65 @@ function setupScrollReveal(){
 
   targets.forEach(element=>scrollRevealObserver.observe(element));
 }
+
+
+/* LANGUAGE SWITCH — ID / EN */
+const languageDictionary = {
+  "Beranda":"Home","Tentang":"About","Keahlian":"Skills","Proyek":"Projects","Perjalanan":"Journey","Kontak":"Contact",
+  "Halo, saya":"Hello, I'm","Hubungi Saya":"Contact Me","Proyek Unggulan.":"Featured Projects.","Proyek Unggulan":"Featured Projects",
+  "Kenali saya":"Get to know me","Tentang Saya.":"About Me.","Sedikit perkenalan tentang diri saya dan hal-hal yang saya sukai.":"A little introduction about me and the things I enjoy.",
+  "Siapa Saya?":"Who Am I?","Informasi Pribadi":"Personal Information","Nama Lengkap":"Full Name","Fokus":"Focus","Prinsip":"Principles",
+  "Hal yang saya pelajari":"What I'm Learning","Teknologi & Tools.":"Technology & Tools.","Teknologi dan tools yang saya gunakan untuk belajar serta mengembangkan proyek digital.":"Technologies and tools I use to learn and build digital projects.",
+  "Karya pilihan":"Selected work","Kumpulan proyek digital dan ide yang sedang saya kembangkan.":"A collection of digital projects and ideas I'm developing.",
+  "Perkembangan saya":"My progress","Perjalanan Saya.":"My Journey.","Setiap proyek adalah kesempatan baru untuk mempelajari sesuatu.":"Every project is a new opportunity to learn something.",
+  "Mari terhubung":"Let's connect","Punya ide?":"Have an idea?","Kirim Pesan":"Send a Message","Punya pertanyaan atau ide? Kirim pesan melalui formulir di bawah ini.":"Have a question or an idea? Send me a message using the form below.",
+  "Nama":"Name","Pesan":"Message","Kirim Pesan":"Send Message","Pesan akan dikirim ke email admin.":"Your message will be sent to the admin email.",
+  "Lihat Proyek ↗":"View Project ↗","URL belum tersedia":"URL not available","Hak cipta dilindungi.":"All rights reserved.",
+  "Panel Pengelola.":"Admin Panel.","Kelola informasi dan konten website portfolio kamu.":"Manage your portfolio website information and content.","Lihat Website ↗":"View Website ↗",
+  "Identitas":"Identity","Tentang Saya":"About Me","Keahlian":"Skills","Proyek":"Projects","Perjalanan":"Journey","Kontak":"Contact","Pengaturan":"Settings",
+  "Identitas Portfolio":"Portfolio Identity","Atur nama, headline, foto, dan informasi utama yang tampil di halaman depan.":"Set the name, headline, photo, and main information shown on the homepage.",
+  "Nama brand / logo":"Brand / Logo Name","Nama lengkap":"Full Name","Jabatan / profesi":"Role / Profession","Kalimat pembuka":"Greeting","Deskripsi utama":"Main Description","URL foto profil":"Profile Photo URL",
+  "Daftar Proyek":"Project List","Tambah Keahlian":"Add Skill","Tambah Proyek":"Add Project","Tambah Perjalanan":"Add Journey","Batal Edit":"Cancel Edit",
+  "Simpan Perubahan":"Save Changes","Perubahan belum disimpan.":"Changes not saved yet.","Perubahan berhasil disimpan di browser ini.":"Changes saved in this browser.",
+  "Nama proyek":"Project Name","Kategori":"Category","Deskripsi":"Description","URL proyek":"Project URL","Informasi Kontak":"Contact Information",
+  "Pengaturan Website":"Website Settings","Reset Data Awal":"Reset Default Data","Edit":"Edit","Hapus":"Delete"
+};
+let currentLanguage = "id";
+try { currentLanguage = localStorage.getItem("portfolio-language") || "id"; } catch(error) {}
+
+function applyLanguage(){
+  const button = document.getElementById("languageToggle");
+  if(button){
+    button.textContent = currentLanguage === "id" ? "EN" : "ID";
+    button.setAttribute("aria-label", currentLanguage === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia");
+    button.title = currentLanguage === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia";
+  }
+  document.documentElement.lang = currentLanguage;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node=>{
+    const original = node.nodeValue;
+    const trimmed = original.trim();
+    if(!trimmed) return;
+    let translated = trimmed;
+    if(currentLanguage === "en"){
+      translated = languageDictionary[trimmed] || trimmed;
+    }else{
+      const reverse = Object.entries(languageDictionary).find(([,value])=>value === trimmed);
+      translated = reverse ? reverse[0] : trimmed;
+    }
+    if(translated !== trimmed){
+      node.nodeValue = original.replace(trimmed,translated);
+    }
+  });
+}
+
+document.getElementById("languageToggle").addEventListener("click",()=>{
+  currentLanguage = currentLanguage === "id" ? "en" : "id";
+  try { localStorage.setItem("portfolio-language",currentLanguage); } catch(error) {}
+  applyLanguage();
+});
 
 /* THEME, MENU, SCROLL */
 function setTheme(theme){
