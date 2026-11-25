@@ -773,7 +773,12 @@ function loadData(){
     const saved = localStorage.getItem("portfolio-content-v1");
     if(saved){
       const parsed = JSON.parse(saved);
-      return {...clone(DEFAULT_DATA),...parsed};
+      const merged = {...clone(DEFAULT_DATA),...parsed};
+      // Data lama di localStorage tidak boleh mengosongkan foto profil default.
+      if(!merged.photo || !String(merged.photo).trim()){
+        merged.photo = DEFAULT_DATA.photo;
+      }
+      return merged;
     }
   }catch(error){}
   return clone(DEFAULT_DATA);
